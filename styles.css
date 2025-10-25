@@ -1,0 +1,54 @@
+body{
+    background-color: rgb(255, 255, 255);
+    margin: 30px;
+    
+
+}
+
+
+.cards-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.cards-header{
+  display: flex;
+  justify-content: center;
+
+}
+
+.cards-item{
+    display: flex;
+    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.075);
+    margin: 100px;
+}
+
+
+
+.img-card{
+width: 120px;
+height: auto;
+
+}
+
+.cards-item:hover{
+    transform:scaleY(50px);
+}
+
+.table-container{
+
+    margin: 50px;
+
+    
+}
+
+@media screen {
+    .cards-container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        direction: row;
+    }
+}
