@@ -1,0 +1,24 @@
+{
+  "name": "wprogramming-diagnostic-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jpmorillom1/wprogramming-diagnostic-test.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jpmorillom1/wprogramming-diagnostic-test/issues"
+  },
+  "homepage": "https://github.com/jpmorillom1/wprogramming-diagnostic-test#readme",
+  "devDependencies": {
+    "electron": "^38.4.0"
+  }
+}
