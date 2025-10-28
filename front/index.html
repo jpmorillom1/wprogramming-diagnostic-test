@@ -28,20 +28,23 @@
         <div class="cards-item">
                 <div class="card" style="width: 18rem;">
                     <div class="cards-header"> 
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Escudo_de_la_Universidad_Central_del_Ecuador_-_Andr%C3%A9s_Agual.png" class="img-card" alt="...">
-                    <p class="card-text">"Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."</p>
+                        <img id="pokemonImg" src="https://vcastle.github.io/pokedex/static/media/pokeball.b7cd3e0a.gif" alt="Pokémon" class="img-card" />
+                        
+
                     </div>
                 <div class="card-body">
-                    <h5 class="card-title">Lorem Ipsum</h5>
-                    <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s </p>
-                    <a href="#" class="btn btn-primary">Click Here!</a>
+                    <h5 class="card-title">Choose your Pokemon!</h5>
+                    <p class="card-text">
+                            <h2 id="pokemonName">Name</h2>
+                            <p id="pokemonType">Type: ???</p>
+                    </p>
+                    <div class="input-group">
+                            <input type="number" id="pokemonId"  class="input" placeholder="Enter ID (1 - 898)" />
+                            <button id="searchBtn" class="button--submit">Search</button>
+                    </div>
                 </div>
                 </div>
         </div>
-        
-
-
-
     </div>
 
 
@@ -75,6 +78,26 @@
         </tbody>
     </table>
     </div>
+    
+    <script>
+        document.getElementById("searchBtn").addEventListener("click", () => {
+        const id = document.getElementById("pokemonId").value;
+        if (!id) return alert("Ingresa un ID de Pokémon");
+
+        fetch(`http://localhost:8080/api/pokemon/${id}`)
+            .then(response => response.json())
+            .then(data => {
+            document.getElementById("pokemonImg").src = data.sprites.other.home.front_default;
+            document.getElementById("pokemonName").textContent = data.name.toUpperCase();
+            document.getElementById("pokemonType").textContent =
+                "Type: " + data.types.map(t => t.type.name).join(", ");
+            })
+            .catch(() => {
+            alert("that pokemon does not exist yet :(");
+            });
+        });
+
+    </script>
 
 
 

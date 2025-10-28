@@ -35,10 +35,22 @@ body{
 .img-card{
 width: 120px;
 height: 120px;
-margin: 20px;;
+margin: 20px;
+transition: transform 0.3s ease;
+
 
 }
 
+
+.img-card:hover {
+
+
+    /* Efecto de brillo (muy moderno) */
+    filter: brightness(1.2);
+    transform: scale(1.1);
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+
+}
 .cards-item:hover{
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.9);
     transform: scale(1.05);
@@ -67,6 +79,45 @@ margin: 20px;;
 
     
 }
+
+/* From Uiverse.io by alexruix */ 
+.input-group {
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  min-height: 50px;
+  max-width: 150px;
+  padding: 0 1rem;
+  color: #000000;
+  font-size: 15px;
+  border: 1px solid #5e4dcd;
+  border-radius: 6px 0 0 6px;
+  background-color: transparent;
+}
+
+.button--submit {
+  min-height: 50px;
+  padding: .5em 1em;
+  border: none;
+  border-radius: 0 6px 6px 0;
+  background-color: #5e4dcd;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color .3s ease-in-out;
+}
+
+.button--submit:hover {
+  background-color: #5e5dcd;
+}
+
+.input:focus, .input:focus-visible {
+  border-color: #3898EC;
+  outline: none;
+}
+
 
 @media (max-width: 768px) {
 
