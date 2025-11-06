@@ -187,48 +187,6 @@ npm install --save-dev electron-builder
 npm run build
 ```
 
-### Adding Features
-
-Future enhancements could include:
-- AI battle prediction display
-- Battle history table implementation
-- Save favorite Pokémon
-- Export battle results
-
-## Troubleshooting
-
-### Application Won't Start
-
-**Error**: Cannot find module 'electron'
-```bash
-# Solution: Reinstall dependencies
-rm -rf node_modules package-lock.json
-npm install
-```
-
-### API Connection Errors
-
-**Error**: Failed to fetch Pokémon data
-
-1. Verify backend is running: `http://localhost:8080/api/pokemon/1`
-2. Check CORS configuration in backend
-3. Ensure no firewall is blocking localhost connections
-
-### Styling Issues
-
-- Clear browser cache (Ctrl+F5 / Cmd+Shift+R)
-- Check Bootstrap CDN connection
-- Verify `styles.css` is loaded correctly
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
-
-## Backend Integration
 
 This frontend requires the backend API to be running:
 
@@ -236,7 +194,6 @@ This frontend requires the backend API to be running:
 - Default backend URL: `http://localhost:8080`
 - CORS must be enabled in backend for cross-origin requests
 
-## Browser Compatibility
 
 While this is an Electron app, the underlying web technologies are:
 - **Modern browsers**: Chrome, Edge, Firefox, Safari
@@ -244,15 +201,6 @@ While this is an Electron app, the underlying web technologies are:
 - **CSS3**: Flexbox, transitions, and modern features
 - **ES6+ JavaScript**: Arrow functions, template literals
 
-## License
-
-This project is part of a diagnostic test for Web Programming coursework.
-
-## Author
-
-Developed for UCE (Universidad Central del Ecuador)
-
----
 
 **Note**: This is an Electron desktop application. It requires Node.js and npm to run. The application serves as the frontend/client for the Pokémon diagnostic test system.
 
