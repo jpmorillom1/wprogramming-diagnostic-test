@@ -24,7 +24,7 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
 
       result.textContent = "Succeess, redirecting...";
       setTimeout(() => {
-        window.location.href = "index.html";
+        window.location.href = "home.html";
       }, 1000);
     } else {
       result.textContent = " invalid credentials.";

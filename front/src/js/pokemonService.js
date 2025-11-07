@@ -14,12 +14,11 @@ export function setupCard(imgId, nameId, typeId, inputId, btnId, isSecond = fals
             alert("Ingresa un ID de Pokémon");
             return;
         }
-
     // get token fron local storage
         const token = localStorage.getItem("token");
         if (!token) {
             alert("Debes iniciar sesión primero");
-            window.location.href = "login.html";
+            window.location.href = "index.html";
             return;
         }
 
