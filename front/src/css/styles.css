@@ -1,6 +1,8 @@
 body{
     background-color: rgb(255, 255, 255);
     margin: 30px;
+    font-family: 'Poppins', sans-serif;
+
     
 
 }
@@ -45,7 +47,6 @@ transition: transform 0.3s ease;
 .img-card:hover {
 
 
-    /* Efecto de brillo (muy moderno) */
     filter: brightness(1.2);
     transform: scale(1.1);
     filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
@@ -80,7 +81,6 @@ transition: transform 0.3s ease;
     
 }
 
-/* From Uiverse.io by alexruix */ 
 .input-group {
   display: flex;
   align-items: center;

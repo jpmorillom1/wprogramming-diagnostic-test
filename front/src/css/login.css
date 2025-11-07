@@ -1,0 +1,68 @@
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  background: url('https://cdn.wallpapersafari.com/14/13/rmMC2h.jpg') 
+              no-repeat center center/cover;
+}
+
+form {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  padding: 40px 50px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+h2 {
+  position: absolute;
+  top: 30px;
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-size: 2em;
+}
+
+label {
+  color: #ffffff;
+  display: block;
+  margin-top: 10px;
+  text-align: left;
+  font-size: 0.9em;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: none;
+  border-radius: 6px;
+  outline: none;
+}
+
+button {
+  margin-top: 20px;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.3);
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+#result {
+  margin-top: 10px;
+  color: #fff;
+  text-align: center;
+}
