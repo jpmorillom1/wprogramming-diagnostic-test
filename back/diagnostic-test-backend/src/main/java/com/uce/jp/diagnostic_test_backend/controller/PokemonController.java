@@ -1,6 +1,8 @@
 package com.uce.jp.diagnostic_test_backend.controller;
 
 import com.uce.jp.diagnostic_test_backend.service.PokemonService;
+import com.uce.jp.diagnostic_test_backend.service.SearchHistoryService;
+import com.uce.jp.diagnostic_test_backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,10 @@ public class PokemonController {
 
     @Autowired
     private PokemonService pokemonService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private SearchHistoryService searchHistoryService;
 
 
     @GetMapping("/pokemon/{id}")

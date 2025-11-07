@@ -1,7 +1,9 @@
 package com.uce.jp.diagnostic_test_backend.service;
 
+import com.uce.jp.diagnostic_test_backend.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -17,12 +19,17 @@ public class PokemonService {
     private RestTemplate restTemplate;
     @Autowired
     private PokemonAiService aiService;
-
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private SearchHistoryService searchHistoryService;
 
     private static final String POKE_API_URL = "https://pokeapi.co/api/v2/pokemon/{id}";
 
     public Map<String,Object> getPokemon(Long id) {
-      //  Object response = restTemplate.getForObject(POKE_API_URL, Object.class, id);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        User user = userService.findByName(username);
         Map response = restTemplate.getForObject(POKE_API_URL,Map.class,id);
 
         HashMap<String,Object> pokemon= new HashMap<>();
@@ -45,19 +52,16 @@ public class PokemonService {
             Map<String,Object> mapHomeSprites = (HashMap<String,Object>) mapOtherSprites.get("home");
             String spriteUrl= (String) mapHomeSprites.get("front_default");
             pokemon.put("sprite",spriteUrl);
+            String pokemonName = (String) pokemon.get("name");
 
-            System.out.println(types    );
-           // System.out.println(response.get("sprites"));
+            searchHistoryService.saveSearch(pokemonName, user);
         }
         System.out.println(pokemon);
         return pokemon;
     }
 
 
-
-
     public String generatePrediction (String pokemon1,String pokemon2){
-
         return aiService.predictResult(pokemon1,pokemon2);
 
     }

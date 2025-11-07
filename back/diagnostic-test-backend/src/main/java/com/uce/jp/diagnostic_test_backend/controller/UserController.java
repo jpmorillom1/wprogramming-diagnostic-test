@@ -3,12 +3,12 @@ package com.uce.jp.diagnostic_test_backend.controller;
 
 import com.uce.jp.diagnostic_test_backend.entity.User;
 import com.uce.jp.diagnostic_test_backend.service.UserService;
-import jakarta.persistence.GeneratedValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+@CrossOrigin("*")
 
 @RestController
 @RequestMapping("/api/user")

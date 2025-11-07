@@ -27,6 +27,11 @@ public class SearchHistory {
         this.user = user;
     }
 
+    public SearchHistory(String pokemonName, User user) {
+        this.pokemonName = pokemonName;
+        this.user = user;
+    }
+
     public Long getId() {
         return id;
     }

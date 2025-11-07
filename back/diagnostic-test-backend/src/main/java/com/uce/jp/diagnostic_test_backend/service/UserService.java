@@ -36,6 +36,11 @@ public class UserService {
 
     }
 
+    public User findByName(String name){
+        return userRepository.findByName(name).orElseThrow();
+
+    }
+
     public List<User> findAll(){
         return userRepository.findAll();
     }
