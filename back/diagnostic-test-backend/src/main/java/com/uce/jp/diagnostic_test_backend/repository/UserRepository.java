@@ -19,8 +19,7 @@ public interface UserRepository extends CrudRepository<User,Long> {
 
     List<User> findAll();
 
-    @Query("select u.searchHistory from User u where u.id=?1")
-    List<SearchHistory> findHistoryByUserId(Long id);
+
 
     boolean existsByName(String name);
 

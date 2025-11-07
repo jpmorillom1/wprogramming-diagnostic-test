@@ -1,13 +1,22 @@
 package com.uce.jp.diagnostic_test_backend.controller;
 
 
+import com.uce.jp.diagnostic_test_backend.dto.SearchHistoryDTO;
+import com.uce.jp.diagnostic_test_backend.entity.SearchHistory;
 import com.uce.jp.diagnostic_test_backend.entity.User;
+import com.uce.jp.diagnostic_test_backend.service.SearchHistoryService;
 import com.uce.jp.diagnostic_test_backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 @CrossOrigin("*")
 
 @RestController
@@ -16,6 +25,8 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private SearchHistoryService searchHistoryService;
 
 
     @GetMapping("/")
@@ -35,6 +46,14 @@ public class UserController {
         return ResponseEntity.ok().body(userService.createUser(user));
     }
 
+    @GetMapping("/history")
+    public ResponseEntity<List<SearchHistoryDTO>> getUserSearchHistory() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+
+        List<SearchHistoryDTO> history = searchHistoryService.getUserSearchHistory(username);
+        return ResponseEntity.ok(history);
+    }
 
 
 }

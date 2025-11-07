@@ -59,6 +59,7 @@ public class SecurityConfig {
                         .requestMatchers("/auth/login").permitAll()
                         .requestMatchers("/api/user/register").permitAll()
                         .requestMatchers("/api/user/**").permitAll()
+                        .requestMatchers("/api/user/history").authenticated()
                         .requestMatchers("/api/pokemon/**").authenticated()
                         .requestMatchers("/swagger-ui/**").permitAll()
                         .requestMatchers("/v3/api-docs/**").permitAll()
