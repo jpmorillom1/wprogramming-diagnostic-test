@@ -11,13 +11,13 @@ export function setupCard(imgId, nameId, typeId, inputId, btnId, isSecond = fals
     btn.addEventListener("click", async () => {
         const id = input.value.trim();
         if (!id) {
-            alert("Ingresa un ID de Pokémon");
+            alert("Please enter a Pokémon ID");
             return;
         }
     // get token fron local storage
         const token = localStorage.getItem("token");
         if (!token) {
-            alert("Debes iniciar sesión primero");
+            alert("You must log in first");
             window.location.href = "index.html";
             return;
         }
@@ -29,7 +29,7 @@ export function setupCard(imgId, nameId, typeId, inputId, btnId, isSecond = fals
                 }
             });
 
-            if (!response.ok) throw new Error("No se encontró el Pokémon");
+            if (!response.ok) throw new Error("Pokémon not found");
 
             const data = await response.json();
 
