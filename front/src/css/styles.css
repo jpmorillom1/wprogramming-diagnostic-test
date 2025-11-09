@@ -63,12 +63,17 @@ transition: transform 0.3s ease;
 
     
 }
+.cards-item{
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+}
 
 .card {
   border-radius: 30px;
   border: none;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-
+  background-color: rgba(255, 0, 0, 0);
 }
 
 
@@ -92,8 +97,8 @@ transition: transform 0.3s ease;
   padding: 0 1rem;
   color: #000000;
   font-size: 15px;
-  border: 1px solid #5e4dcd;
-  border-radius: 6px 0 0 6px;
+  border: 1px solid #000000;
+  border-radius: 50px;
   background-color: transparent;
 }
 
@@ -101,8 +106,8 @@ transition: transform 0.3s ease;
   min-height: 50px;
   padding: .5em 1em;
   border: none;
-  border-radius: 0 6px 6px 0;
-  background-color: #5e4dcd;
+  border-radius: 50px;
+  background-color: #000000;
   color: #fff;
   font-size: 15px;
   cursor: pointer;
@@ -110,12 +115,40 @@ transition: transform 0.3s ease;
 }
 
 .button--submit:hover {
-  background-color: #5e5dcd;
+  background-color: #333333;
 }
 
 .input:focus, .input:focus-visible {
   border-color: #3898EC;
   outline: none;
+}
+
+.icon{ 
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+}
+
+.button-with-image{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 40px;
+  min-height: 50px;
+  padding: .5em 1em;
+  border: none;
+  border-radius: 50px;
+  background-color: #000000;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color .3s ease-in-out;
+    
+}
+
+.button-with-image:hover {
+  background-color: #333333;
 }
 
 
