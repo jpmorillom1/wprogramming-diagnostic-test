@@ -14,7 +14,6 @@ export function setupCard(imgId, nameId, typeId, inputId, btnId, isSecond = fals
             alert("Please enter a Pokémon ID");
             return;
         }
-    // get token fron local storage
         const token = localStorage.getItem("token");
         if (!token) {
             alert("You must log in first");
@@ -45,11 +44,41 @@ export function setupCard(imgId, nameId, typeId, inputId, btnId, isSecond = fals
 
             if (pokemon1Name && pokemon2Name) {
                 console.log(`pokemon 1: ${pokemon1Name} vs pokemon 2: ${pokemon2Name}`);
-            } else {
-                console.log(`load: ${data.name}`);
             }
         } catch (error) {
             alert("That Pokémon does not exist yet :(");
+        }
+    });
+}
+
+
+export function setupPredict(btnId, resultId) {
+    const btn = document.getElementById(btnId);
+    const result = document.getElementById(resultId);
+
+    btn.addEventListener("click", async () => {
+        if (!pokemon1Name || !pokemon2Name) {
+            alert("Please select both Pokémon first!");
+            return;
+        }
+
+        try {
+            const token = localStorage.getItem("token");
+
+
+            const res = await fetch(`https://wprogramming-diagnostic-test.onrender.com/api/pokemon/predict/${pokemon1Name}/${pokemon2Name}`, {
+                method: "GET",
+                headers: {
+                    "Authorization": "Bearer " + token
+                }
+            });
+
+            if (!res.ok) throw new Error("Error getting prediction");
+
+            const data = await res.json();
+            result.textContent = `Result: ${data.prediction}`;
+        } catch (error) {
+            result.textContent = "Error: Could not get prediction.";
         }
     });
 }

@@ -15,7 +15,7 @@
         <div class="cards-item">
                 <div class="card" style="width: 18rem;">
                     <div class="cards-header"> 
-                        <img id="pokemonImg" src="https://vcastle.github.io/pokedex/static/media/pokeball.b7cd3e0a.gif" alt="Pokémon" class="img-card" />                       
+                        <img id="pokemonImg" src="https://www.svgrepo.com/show/315521/pokemon.svg" alt="Pokémon" class="img-card" />                       
                     </div>
                 <div class="card-body">
                     <h5 class="card-title">Choose your Pokemon!</h5>
@@ -24,17 +24,23 @@
                             <p id="pokemonType">Types: ???</p>
                     </p>
                     <div class="input-group">
-                            <input type="number" id="pokemonId"  class="input" placeholder="Enter ID (1 - 898)" />
+                            <input type="number" id="pokemonId"  class="input" placeholder="Enter ID" />
                             <button id="searchBtn" class="button--submit">Search</button>
                     </div>
                 </div>
                 </div>
         </div>
 
+        <div class="vs-text">
+            <h1> <b>VS</b></h1>
+            
+            
+        </div>
+
         <div class="cards-item">
             <div class="card" style="width: 18rem;">
                 <div class="cards-header"> 
-                    <img id="pokemonImg2" src="https://vcastle.github.io/pokedex/static/media/pokeball.b7cd3e0a.gif" alt="Pokémon" class="img-card" />                       
+                    <img id="pokemonImg2" src="https://www.svgrepo.com/show/315521/pokemon.svg" alt="Pokémon" class="img-card" />                       
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">Choose your Pokemon!</h5>
@@ -43,7 +49,7 @@
                         <p id="pokemonType2">Types: ???</p>
                     </p>
                     <div class="input-group">
-                        <input type="number" id="pokemonId2" class="input" placeholder="Enter ID (1 - 898)" />
+                        <input type="number" id="pokemonId2" class="input" placeholder="Enter ID" />
                         <button id="searchBtn2" class="button--submit">Search</button>
                     </div>
                 </div>
@@ -51,45 +57,27 @@
         </div>
         
         
+
+    </div >
+        <div class="text-center mt-4">
+        <button id="predictBtn" class="button--submit">Predict result with AI <img src="https://img.icons8.com/ios11/512/FFFFFF/bard.png" alt="" class="icon"></button>
+        
+
+        <p id="predictionResult" class="mt-3 fw-bold"></p>
     </div>
 
 
-
-    <div class="table-container">
-
-    <table class="table table-striped">
-        <thead>
-            <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Description</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            </tr>
-            <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            </tr>
-            <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            </tr>
-        </tbody>
-    </table>
-    </div>
+    
     
     <script type="module">
         import { setupCard } from './js/pokemonService.js';
 
         setupCard("pokemonImg", "pokemonName", "pokemonType", "pokemonId", "searchBtn");
         setupCard("pokemonImg2", "pokemonName2", "pokemonType2", "pokemonId2", "searchBtn2", true);
+        setupPredict("predictBtn", "predictionResult");
+
+        import { setupPredict } from './js/pokemonService.js';
+
     </script>
 
 

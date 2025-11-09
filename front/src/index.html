@@ -8,22 +8,33 @@
 
   <link rel="stylesheet" href="css/login.css">
 </head>
-<body>
 
-  <div class="login-container">
-    <form id="loginForm">
-      <label>Username:</label>
-      <input type="text" id="name" required><br><br>
+<body >
+  
+    <div class="login-container">
+      <form id="loginForm">
+        <div class="login-header">
+        <img src="https://www.svgrepo.com/show/315521/pokemon.svg" alt="">
+        <h1>Pokemon Battle Predictor</h1>
+        </div>
+        <h2>Welcome back Master!</h2>
+        <br>
 
-      <label>Password:</label>
-      <input type="password" id="password" required><br><br>
+        <input type="text" id="name" placeholder="Username" required><br><br>
 
-      <button type="submit">Log In</button>
-    </form>
+        <input type="password" id="password" placeholder="Password" required><br><br>
 
-    <p id="result"></p>
-  </div>
+        <button type="submit">Log In</button>
+      </form>
+
+      <p id="result"></p>
+    </div>
+
+    <div class="image-container">
+      <p></p>
+    </div>
 
   <script type="module" src="js/login.js"></script>
+
 </body>
 </html>
