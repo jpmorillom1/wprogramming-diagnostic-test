@@ -76,6 +76,7 @@ public class SecurityConfig {
         configuration.setAllowedOrigins(List.of(
                 "http://127.0.0.1:5500",
                 "https://wprogramming-diagnostic-test.vercel.app/",
+                "http://52.20.242.194",
                 "http://98.95.120.218"
         ));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
