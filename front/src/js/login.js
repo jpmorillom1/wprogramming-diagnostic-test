@@ -1,4 +1,4 @@
-const API_URL = "http://52.20.242.194/auth/login"; 
+const API_URL = "http://52.20.242.194:8080/auth/login"; 
 
 document.getElementById("loginForm").addEventListener("submit", async (e) => {
   e.preventDefault();
