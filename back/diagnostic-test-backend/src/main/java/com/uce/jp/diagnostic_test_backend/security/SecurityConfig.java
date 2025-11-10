@@ -75,7 +75,8 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(List.of(
                 "http://127.0.0.1:5500",
-                "https://wprogramming-diagnostic-test.vercel.app/"
+                "https://wprogramming-diagnostic-test.vercel.app/",
+                "http://98.95.120.218"
         ));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
