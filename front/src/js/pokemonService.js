@@ -22,7 +22,7 @@ export function setupCard(imgId, nameId, typeId, inputId, btnId, isSecond = fals
         }
 
         try {
-            const response = await fetch(`http://52.20.242.194/api/pokemon/${id}`, {
+            const response = await fetch(`http://52.20.242.194:8080/api/pokemon/${id}`, {
                 headers: {
                     "Authorization": "Bearer " + token
                 }
@@ -66,7 +66,7 @@ export function setupPredict(btnId, resultId) {
             const token = localStorage.getItem("token");
 
 
-            const res = await fetch(`http://52.20.242.194/api/pokemon/predict/${pokemon1Name}/${pokemon2Name}`, {
+            const res = await fetch(`http://52.20.242.194:8080/api/pokemon/predict/${pokemon1Name}/${pokemon2Name}`, {
                 method: "GET",
                 headers: {
                     "Authorization": "Bearer " + token
