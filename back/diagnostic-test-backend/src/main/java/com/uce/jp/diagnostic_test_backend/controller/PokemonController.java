@@ -36,6 +36,5 @@ public class PokemonController {
         Map<String,String> predictionMap=new HashMap<>();
         predictionMap.put("prediction", pokemonService.generatePrediction(pokemon1,pokemon2));
         return ResponseEntity.ok(predictionMap);
-
     }
 }
