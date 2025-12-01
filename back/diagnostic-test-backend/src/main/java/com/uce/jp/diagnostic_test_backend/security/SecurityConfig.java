@@ -62,6 +62,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/user/history").authenticated()
                         .requestMatchers("/api/pokemon/**").authenticated()
                         .requestMatchers("/stress/**").permitAll()
+                        .requestMatchers("/student/**").permitAll()
                         .requestMatchers("/swagger-ui/**").permitAll()
                         .requestMatchers("/v3/api-docs/**").permitAll()
                         .anyRequest().authenticated()
