@@ -16,7 +16,7 @@ public class StressController {
         for (int i = 0; i < 1000000; i++) {
             result += Math.sqrt(i);
         }
-        return "result finished: " + result;
+        return "strees test result: " + result;
     }
 
 }
