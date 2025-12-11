@@ -1,5 +1,8 @@
 package com.uce.jp.diagnostic_test_backend.controller;
 
+import com.uce.jp.diagnostic_test_backend.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,6 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/stress")
 public class StressController {
+
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping("/cpu")
     public String stressCpu() {
@@ -22,5 +28,12 @@ public class StressController {
     @GetMapping("/hello-world")
     public String helloWorld(){
         return "Hello world!";
+    }
+
+
+    @GetMapping("/list")
+    public ResponseEntity<?> getUsers(){
+
+        return ResponseEntity.ok().body(userRepository.findAll());
     }
 }
