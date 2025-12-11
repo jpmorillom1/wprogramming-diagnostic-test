@@ -3,9 +3,6 @@ name: Deploy Backend to AWS
 on:
   push:
     branches: ["main"]
-    paths:
-      - "backend/diagnostic-test-backend/**"
-      - ".github/workflows/deploy-backend.yml"
 
 env:
   ASG_NAME: "terraform-20251210232338250300000003"
