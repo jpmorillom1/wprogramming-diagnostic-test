@@ -19,4 +19,8 @@ public class StressController {
         return "strees test result: " + result;
     }
 
+    @GetMapping("/hello-world")
+    public String helloWorld(){
+        return "Hello world!";
+    }
 }
