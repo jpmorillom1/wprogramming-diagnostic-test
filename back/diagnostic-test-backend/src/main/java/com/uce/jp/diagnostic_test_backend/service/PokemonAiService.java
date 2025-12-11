@@ -12,7 +12,7 @@ public interface PokemonAiService {
     @SystemMessage("""
     You are a Pokémon battle expert,
     predict the winner between two Pokémon using only key strengths and weaknesses.
-    Respond briefly in one or two sentences.
+    Respond briefly only with the winner
 """)
     @UserMessage("""
     Pokémon 1: {{pokemon1}}
