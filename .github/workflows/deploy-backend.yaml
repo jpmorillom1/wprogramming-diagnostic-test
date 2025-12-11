@@ -5,7 +5,7 @@ on:
     branches: ["main"]
 
 env:
-  ASG_NAME: "terraform-20251210232338250300000003"
+  ASG_NAME: "terraform-20251211201921051600000003"
   DOCKER_IMAGE: "jpmorillom1/dt-backend:latest"
 
 jobs:
