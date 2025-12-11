@@ -3,6 +3,9 @@ name: Deploy Backend to AWS
 on:
   push:
     branches: ["main"]
+    paths:
+      - "back/diagnostic-test-backend/**"
+      - ".github/workflows/deploy-backend.yml"
 
 env:
   ASG_NAME: "terraform-20251210232338250300000003"
@@ -14,7 +17,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ./backend/diagnostic-test-backend
+        working-directory: ./back/diagnostic-test-backend
 
     steps:
       - name: Checkout code
@@ -32,8 +35,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: ./backend/diagnostic-test-backend
-          file: ./backend/diagnostic-test-backend/Dockerfile
+          context: ./back/diagnostic-test-backend
+          file: ./back/diagnostic-test-backend/Dockerfile
           push: true
           tags: ${{ env.DOCKER_IMAGE }}
           cache-from: type=gha
