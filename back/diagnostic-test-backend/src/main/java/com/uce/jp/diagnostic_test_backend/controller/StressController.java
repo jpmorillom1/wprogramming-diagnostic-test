@@ -11,7 +11,7 @@ public class StressController {
 
     @GetMapping("/cpu")
     public String stressCpu() {
-        System.out.println("Initializing stress process");
+        System.out.println("Initializing cpu stress process");
         double result = 0;
         for (int i = 0; i < 1000000; i++) {
             result += Math.sqrt(i);
