@@ -36,4 +36,9 @@ public class StressController {
 
         return ResponseEntity.ok().body(userRepository.findAll());
     }
+
+    @GetMapping("/test")
+    public String test(){
+        return "test asc refresh";
+    }
 }
