@@ -41,4 +41,12 @@ public class StressController {
     public String test(){
         return "test asc refresh";
     }
+
+
+    @GetMapping("/practice-2")
+    public String practice(){
+        return "this a little change for pull request";
+    }
+
+
 }
