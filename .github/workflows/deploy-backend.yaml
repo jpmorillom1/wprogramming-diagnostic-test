@@ -10,10 +10,10 @@ env:
   IMAGE_FRONT: "jpmorillom1/vanilla-front"
   
   # ASG DE PRODUCCION
-  ASG_PROD: "terraform-20251211233430374300000003"
+  ASG_PROD: "terraform-20251217001457337900000004"
   
   # ASG DE QA (Pon aquí tu nombre real del ASG de QA)
-  ASG_QA: "terraform-QA-xxxxxxxxxxxxxxxx" 
+  ASG_QA: "terraform-20251219000039502400000005" 
 
 jobs:
   # ------------------------------------------------------------------
