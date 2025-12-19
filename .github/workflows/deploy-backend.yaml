@@ -1,21 +1,29 @@
-name: Deploy Backend to AWS
+name: Deploy Fullstack (Back + Front) to AWS
 
 on:
   push:
-    branches: ["main"]
+    # Agregamos 'features' para que puedas probar sin ensuciar qa/main
+    branches: ["main", "qa", "features"] 
 
 env:
-  ASG_NAME: "terraform-20251211233430374300000003"
-  DOCKER_IMAGE: "jpmorillom1/dt-backend:latest"
+  IMAGE_BACK: "jpmorillom1/dt-backend"
+  IMAGE_FRONT: "jpmorillom1/vanilla-front"
+  
+  # ASG DE PRODUCCION
+  ASG_PROD: "terraform-20251211233430374300000003"
+  
+  # ASG DE QA (Pon aquí tu nombre real del ASG de QA)
+  ASG_QA: "terraform-QA-xxxxxxxxxxxxxxxx" 
 
 jobs:
-  build-and-push:
+  # ------------------------------------------------------------------
+  # JOB 1: CONSTRUIR Y PUBLICAR BACKEND
+  # ------------------------------------------------------------------
+  build-backend:
     runs-on: ubuntu-latest
-
     defaults:
       run:
         working-directory: ./back/diagnostic-test-backend
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -29,21 +37,77 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Build and push Docker image
+      - name: Determine Docker Tag
+        id: tag
+        run: |
+          # Si es main -> latest. Si es qa O features -> qa
+          if [ "${{ github.ref_name }}" == "main" ]; then
+            echo "docker_tag=latest" >> $GITHUB_OUTPUT
+          else
+            echo "docker_tag=qa" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Build and push Backend
         uses: docker/build-push-action@v5
         with:
           context: ./back/diagnostic-test-backend
           file: ./back/diagnostic-test-backend/Dockerfile
           push: true
-          tags: ${{ env.DOCKER_IMAGE }}
+          tags: ${{ env.IMAGE_BACK }}:${{ steps.tag.outputs.docker_tag }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
+  # ------------------------------------------------------------------
+  # JOB 2: CONSTRUIR Y PUBLICAR FRONTEND
+  # ------------------------------------------------------------------
+  build-frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./front 
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Determine Docker Tag
+        id: tag
+        run: |
+          if [ "${{ github.ref_name }}" == "main" ]; then
+            echo "docker_tag=latest" >> $GITHUB_OUTPUT
+          else
+            echo "docker_tag=qa" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Build and push Frontend
+        uses: docker/build-push-action@v5
+        with:
+          context: ./front 
+          file: ./front/Dockerfile
+          push: true
+          tags: ${{ env.IMAGE_FRONT }}:${{ steps.tag.outputs.docker_tag }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  # ------------------------------------------------------------------
+  # JOB 3: DEPLOY (INTELIGENTE)
+  # ------------------------------------------------------------------
   deploy-to-aws:
-    needs: build-and-push
+    needs: [build-backend, build-frontend]
     runs-on: ubuntu-latest
     steps:
-      - name: Configure AWS Credentials
+      
+      # CASO 1: PROD (Solo si es main)
+      - name: Configure AWS Credentials (PROD)
+        if: github.ref == 'refs/heads/main'
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -51,9 +115,33 @@ jobs:
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
           aws-region: ${{ secrets.AWS_REGION }}
 
+      # CASO 2: QA (Si es qa O features)
+      - name: Configure AWS Credentials (QA)
+        # Aquí permitimos que 'features' use las credenciales de QA para probar
+        if: github.ref == 'refs/heads/qa' || github.ref == 'refs/heads/features'
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.QA_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.QA_AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.QA_AWS_SESSION_TOKEN }} 
+          aws-region: ${{ secrets.QA_AWS_REGION }} # <--- AQUÍ ESTÁ EL CAMBIO
+
+      # DETERMINAR QUE ASG REFRESCAR
+      - name: Set ASG Name Variable
+        id: set-asg
+        run: |
+          if [ "${{ github.ref_name }}" == "main" ]; then
+            echo "TARGET_ASG=${{ env.ASG_PROD }}" >> $GITHUB_ENV
+          else
+            # Tanto QA como Features despliegan al ASG de QA
+            echo "TARGET_ASG=${{ env.ASG_QA }}" >> $GITHUB_ENV
+          fi
+
       - name: Refresh Auto Scaling Group
         run: |
-          echo "Iniciando rotación de instancias..."
+          echo "Desplegando desde rama: ${{ github.ref_name }}"
+          echo "Refrescando ASG: ${{ env.TARGET_ASG }}"
+          
           aws autoscaling start-instance-refresh \
-            --auto-scaling-group-name ${{ env.ASG_NAME }} \
+            --auto-scaling-group-name ${{ env.TARGET_ASG }} \
             --preferences '{"MinHealthyPercentage": 50, "InstanceWarmup": 60}'
