@@ -47,6 +47,11 @@ public class StressController {
     public String practice(){
         return "this a little change for pull request";
     }
+    
+    @GetMapping("/practice-3")
+    public String practice3(){
+        return "test for qa deploy on aws";
+    }
 
 
 }
