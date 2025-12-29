@@ -80,7 +80,8 @@ public class SecurityConfig {
                 "https://wprogramming-diagnostic-test.vercel.app/",
                 "https://tanstack-router-vite-ts.vercel.app/",
                 "http://52.20.242.194",
-                "http://98.95.120.218"
+                "http://98.95.120.218",
+                "http://fullstack-alb-1823758252.us-east-1.elb.amazonaws.com"
         ));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
