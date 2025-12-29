@@ -13,7 +13,7 @@ env:
   ASG_PROD: "terraform-20251217001457337900000004"
   
   # ASG DE QA (Pon aquí tu nombre real del ASG de QA)
-  ASG_QA: "terraform-20251219000039502400000005" 
+  ASG_QA: "terraform-20251229005021064600000005" 
 
 jobs:
   # ------------------------------------------------------------------
