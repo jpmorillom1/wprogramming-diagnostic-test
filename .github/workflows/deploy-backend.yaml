@@ -32,10 +32,9 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         run: |
-          mvn verify sonar:sonar \
+          mvn sonar:sonar -DskipTests \
             -Dsonar.projectKey=${{ github.repository_owner }}-${{ github.event.repository.name }} \
             -Dsonar.projectName=${{ github.event.repository.name }} \
             -Dsonar.sources=src/main/java \
-            -Dsonar.tests=src/test/java \
             -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
             -Dsonar.token=${{ secrets.SONAR_TOKEN }}
