@@ -22,7 +22,7 @@ public class PokemonController {
     @Autowired
     private SearchHistoryService searchHistoryService;
 
-
+    //HOLA
     @GetMapping("/pokemon/{id}")
     ResponseEntity<?> getPokemon(@PathVariable Long id){
 
