@@ -17,10 +17,23 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # necesario para blame/historial de análisis
+          fetch-depth: 0
 
-      - name: Test connectivity
-        run: curl -v ${{ secrets.SONAR_HOST_URL }}/api/system/status
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Cache Maven packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
+      - name: Compile Java (solo para generar .class, sin tests)
+        run: mvn -B compile -DskipTests
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v6
@@ -31,6 +44,9 @@ jobs:
           args: >
             -Dsonar.projectKey=wprogramming-diagnostic-test
             -Dsonar.projectName=wprogramming-diagnostic-test
+            -Dsonar.java.binaries=target/classes
+            -Dsonar.sources=.
+            -Dsonar.exclusions=**/node_modules/**,**/target/**
 
       - name: SonarQube Quality Gate Check
         uses: SonarSource/sonarqube-quality-gate-action@v1
