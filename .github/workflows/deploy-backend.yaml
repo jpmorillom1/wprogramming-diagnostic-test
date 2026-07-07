@@ -11,6 +11,7 @@ on:
 
 jobs:
   sonarqube:
+  
     name: SonarQube Scan
     runs-on: ubuntu-latest
     steps:
@@ -18,7 +19,11 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0  # necesario para blame/historial de análisis
+          
+      - name: Test connectivity
+        run: curl -v ${{ secrets.SONAR_HOST_URL }}/api/system/status
 
+         
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v4
         env:
@@ -30,3 +35,4 @@ jobs:
         timeout-minutes: 5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          
