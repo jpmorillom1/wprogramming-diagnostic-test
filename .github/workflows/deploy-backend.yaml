@@ -33,7 +33,7 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Compile Java (solo para generar .class, sin tests)
-        run: mvn -B compile -DskipTests
+        run: mvn -B compile -DskipTests -f back/diagnostic-test-backend/pom.xml
 
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v6
@@ -44,7 +44,7 @@ jobs:
           args: >
             -Dsonar.projectKey=wprogramming-diagnostic-test
             -Dsonar.projectName=wprogramming-diagnostic-test
-            -Dsonar.java.binaries=target/classes
+            -Dsonar.java.binaries=back/diagnostic-test-backend/target/classes
             -Dsonar.sources=.
             -Dsonar.exclusions=**/node_modules/**,**/target/**
 
